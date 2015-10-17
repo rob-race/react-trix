@@ -5,7 +5,7 @@
   "authors": [
     "Travis Arnold <ftntravis@gmail.com>"
   ],
-  "description": "Build flexible WYSIWYG editors with ease.",
+  "description": "React wrapper around Trix editor from Base Camp.",
   "main": ["./dist/react-trix.js"],
   "keywords": [
     "react",
