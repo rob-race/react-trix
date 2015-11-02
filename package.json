@@ -32,8 +32,11 @@
     "url": "https://github.com/souporserious/react-trix/issues"
   },
   "homepage": "https://github.com/souporserious/react-trix",
-  "peerDependencies": {
-    "react": ">=0.13.2 || ^0.14.0-beta1"
+  "dependencies": {
+    "react": "^0.14.1",
+    "react-addons-shallow-compare": "^0.14.1",
+    "react-dom": "^0.14.1",
+    "trix": "^0.9.0"
   },
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",
