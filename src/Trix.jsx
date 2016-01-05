@@ -16,7 +16,7 @@ class TrixEditor extends React.Component {
     this._editor.addEventListener('trix-change', this._handleChange)
   }
 
-  componentWillunmount() {
+  componentWillUnmount() {
     this._editor.removeEventListener('trix-initialize', this._handleChange)
     this._editor.removeEventListener('trix-change', this._handleChange)
   }
