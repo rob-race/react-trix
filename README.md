@@ -1,4 +1,5 @@
-# Abandoned please contact me if you want to take this project over
+**2017/03/08: We just took over this package and are currently working on an  update.**
+
 
 ## React Trix 0.1.0
 
