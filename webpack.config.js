@@ -1,24 +1,31 @@
-var path = require('path');
-var nodeModulesDir = path.resolve(__dirname, 'node_modules');
+var webpack = require("webpack");
 
 module.exports = {
   entry: {
-    index: ['webpack/hot/dev-server', './example/index.jsx']
+    index: "./example/demo.tsx"
   },
   output: {
-    path: './example',
-    filename: 'bundle.js'
+    filename: "bundle.js",
+    path: __dirname + "/example"
   },
+  devtool: "source-map",
+  plugins: [
+    new webpack.ProvidePlugin({
+      "React": "react",
+    })
+  ],
   module: {
-    loaders: [
-      {test: /\.(js|jsx)/, exclude: /node_modules/, loader: 'babel?stage=0'},
-      {test: /\.scss$/, loader: 'style!css!autoprefixer!sass?sourceMap'}
+    rules: [
+      // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+      { test: /\.tsx?$/, loader: "ts-loader" },
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: [".ts", ".tsx", ".js"]
   },
-  devServer: {
-    contentBase: './example',
-  }
+  /*devServer: {
+    contentBase: "./example",
+    inline: true
+  }*/
 };

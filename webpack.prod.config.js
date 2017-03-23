@@ -1,36 +1,43 @@
-var path = require('path');
-var webpack = require('webpack');
+var path = require("path");
+var webpack = require("webpack");
 var TARGET = process.env.TARGET || null;
 
 var config = {
   entry: {
-    index: './src/react-trix.js',
+    index: './src/react-trix.tsx',
   },
   output: {
-    path: path.join(__dirname, 'dist'),
     publicPath: 'dist/',
-    filename: 'react-trix.js',
-    sourceMapFilename: 'react-trix.sourcemap.js',
-    library: 'Trix',
+    filename: "react-trix.js",
+    path: __dirname + "/dist",
+    sourceMapFilename: "react-trix.sourcemap.js",
+    library: 'react-trix',
     libraryTarget: 'umd'
   },
   module: {
-    loaders: [
-      {test: /\.(js|jsx)/, loader: 'babel?stage=0'}
+    rules: [
+      // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+      { test: /\.tsx?$/, loader: "ts-loader" },
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
     ]
   },
-  plugins: [],
+  plugins: [
+    new webpack.ProvidePlugin({
+      "React": "react",
+    })
+  ],
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   externals: {
-    'react': 'React'
+    "react": "React",
+    "react-dom": "react-dom"
   },
 };
 
-if(TARGET === 'minify') {
-  config.output.filename = 'react-trix.min.js';
-  config.output.sourceMapFilename = 'react-trix.min.js';
+if (TARGET === "minify") {
+  config.output.filename = "react-trix.min.js";
+  config.output.sourceMapFilename = "react-trix.sourcemap.min.js";
   config.plugins.push(new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false
