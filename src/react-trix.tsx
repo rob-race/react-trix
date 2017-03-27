@@ -1,9 +1,4 @@
 import * as React from "react";
-import * as Trix from "trix";
-
-export interface IState {
-  id: string;
-}
 
 export interface TrixEditorProps {
   autoFocus?: boolean;
@@ -11,17 +6,18 @@ export interface TrixEditorProps {
   value?: string;
   uploadURL?: string;
   uploadData?: { [key: string]: string };
+  onEditorReady?: (editor: any) => void;
   onChange: (html: string, text: string) => void;
 }
 
-export default class TrixEditor extends React.Component<TrixEditorProps, IState> {
+export class TrixEditor extends React.Component<TrixEditorProps, {}> {
+  private id: string;
   private editor: any = null;
   constructor(props: TrixEditorProps) {
     super(props);
 
-    this.state = {
-      id: this.generateId()
-    }
+    this.id = this.generateId();
+    console.log("ctor");
   }
   private generateId(): string {
     let timestamp = Date.now();
@@ -38,29 +34,29 @@ export default class TrixEditor extends React.Component<TrixEditorProps, IState>
     return "T" + timestamp.toString();
   }
   componentDidMount() {
-    let state = this.state;
     let props = this.props;
 
-    const elm = document.createElement("trix-editor");
-    elm.id = `editor-${state.id}`;
-    elm.setAttribute("input", `input-${state.id}`);
+    console.log("get by id", this.id);
 
-    if (props.autoFocus) {
-      elm.setAttribute("autoFocus", props.autoFocus.toString());
+    console.log(document.body.innerHTML);
+
+    this.editor = document.getElementById(`editor-${this.id}`);
+    if (this.editor) {
+      this.editor.addEventListener('trix-initialize', this.handleChange.bind(this));
+      this.editor.addEventListener('trix-change', this.handleChange.bind(this));
+
+      if (props.uploadURL) {
+        this.editor.addEventListener("trix-attachment-add", this.handleUpload.bind(this));
+      }
+
+      if (props.onEditorReady && typeof props.onEditorReady == "function") {
+        props.onEditorReady(this.editor);
+      }
+    } else {
+      console.error("editor not found");
     }
 
-    if (props.placeholder) {
-      elm.setAttribute("placeholder", props.placeholder);
-    }
-    document.getElementById(`te-${this.state.id}`).appendChild(elm);
-
-    this.editor = document.getElementById(`editor-${this.state.id}`);
-    this.editor.addEventListener('trix-initialize', this.handleChange.bind(this));
-    this.editor.addEventListener('trix-change', this.handleChange.bind(this));
-
-    if (this.props.uploadURL) {
-      this.editor.addEventListener("trix-attachment-add", this.handleUpload.bind(this));
-    }
+    console.log("did mount");
   }
   componentWillUnmount() {
     this.editor.removeEventListener("trix-initialize", this.handleChange);
@@ -69,10 +65,13 @@ export default class TrixEditor extends React.Component<TrixEditorProps, IState>
     if (this.props.uploadURL) {
       this.editor.removeEventListener("trix-attachment-add", this.handleUpload);
     }
+
+    console.log("will unmount");
   }
   private handleChange(e) {
     if (this.props.onChange) {
       this.props.onChange(e.target.innerHTML, e.target.innerText);
+      console.log("on change");
     }
   }
   private handleUpload(e: any) {
@@ -113,14 +112,29 @@ export default class TrixEditor extends React.Component<TrixEditorProps, IState>
   }
   render() {
     let state = this.state;
+    let props = this.props;
 
+    var attributes: { [key: string]: string } = {
+      "id": `editor-${this.id}`,
+      "input": `input-${this.id}`
+    };
 
+    if (props.autoFocus) {
+      attributes["autoFocus"] = props.autoFocus.toString();
+    }
+
+    if (props.placeholder) {
+      attributes["placeholder"] = props.placeholder;
+    }
+
+    console.log("id:", this.id);
 
     return (
-      <div id={`te-${state.id}`}>
+      <div>
+        {React.createElement("trix-editor", attributes)}
         <input
           type="hidden"
-          id={`input-${state.id}`}
+          id={`input-${this.id}`}
           value={this.props.value}
         />
       </div>

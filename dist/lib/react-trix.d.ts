@@ -1,8 +1,5 @@
 /// <reference types="react" />
 import * as React from "react";
-export interface IState {
-    id: string;
-}
 export interface TrixEditorProps {
     autoFocus?: boolean;
     placeholder?: string;
@@ -11,9 +8,11 @@ export interface TrixEditorProps {
     uploadData?: {
         [key: string]: string;
     };
+    onEditorReady?: (editor: any) => void;
     onChange: (html: string, text: string) => void;
 }
-export default class TrixEditor extends React.Component<TrixEditorProps, IState> {
+export declare class TrixEditor extends React.Component<TrixEditorProps, {}> {
+    private id;
     private editor;
     constructor(props: TrixEditorProps);
     private generateId();

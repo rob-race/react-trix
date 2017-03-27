@@ -1,0 +1,31 @@
+/*{
+    "version": "0.1.0",
+    "command": "webpack",
+    "isShellCommand": true
+}
+*/
+{
+  "version": "0.1.0",
+  "name": "npmTask",
+  //...
+  "suppressTaskName": true,
+  "command": "npm",
+  "isShellCommand": true,
+  "args": [
+    "run"
+  ],
+  "tasks": [
+    {
+      //Test Task
+      "taskName": "mocha",
+      // Don't run on Shift+Ctrl+B
+      "isBuildCommand": false,
+      // Run on Shift+Ctrl+T
+      "isTestCommand": true,
+      "showOutput": "always",
+      "args": [
+        "test"
+      ]
+    }
+  ]
+}

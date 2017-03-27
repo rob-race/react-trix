@@ -2,15 +2,14 @@
   "name": "react-trix",
   "version": "0.2.0",
   "description": "React wrapper around Basecamp's Trix editor.",
-  "main": "dist/react-trix.js",
+  "main": "main.js",
   "scripts": {
     "build": "npm run build:lib && NODE_ENV=production webpack --config webpack.prod.config.js",
     "build:lib": "tsc",
     "prebuild": "rm -rf dist && mkdir dist",
     "prepublish": "npm run build",
-    "postbuild": "NODE_ENV=production TARGET=minify webpack --config webpack.prod.config.js && cp src/index.d.ts dist/",
-    "tsd": "cp src/index.d.ts dist/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postbuild": "NODE_ENV=production TARGET=minify webpack --config webpack.prod.config.js",
+    "test": "./test.sh"
   },
   "repository": {
     "type": "git",
@@ -39,11 +38,21 @@
     "trix": "^0.10.1"
   },
   "devDependencies": {
+    "@types/chai": "^3.4.35",
+    "@types/enzyme": "^2.7.6",
+    "@types/mocha": "^2.2.40",
     "@types/react": "^15.0.18",
     "@types/react-dom": "^0.14.23",
+    "@types/sinon": "^1.16.36",
+    "chai": "^3.5.0",
+    "enzyme": "^2.8.0",
     "http-server": "^0.9.0",
+    "jsdom": "^9.12.0",
+    "mocha": "^3.2.0",
     "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
+    "sinon": "^2.1.0",
     "source-map-loader": "^0.2.0",
     "ts-loader": "^2.0.2",
     "typescript": "^2.2.1",
@@ -57,7 +66,8 @@
     "dist",
     "lib",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "main.js"
   ],
-  "types": "dist/lib/react-trix.d.ts"
+  "types": "lib/react-trix.d.ts"
 }

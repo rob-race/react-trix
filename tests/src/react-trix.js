@@ -123,4 +123,3 @@ var TrixEditor = (function (_super) {
     return TrixEditor;
 }(React.Component));
 exports.TrixEditor = TrixEditor;
-//# sourceMappingURL=react-trix.js.map

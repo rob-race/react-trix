@@ -105,9 +105,8 @@ var TrixEditor = (function (_super) {
     function TrixEditor(props) {
         var _this = _super.call(this, props) || this;
         _this.editor = null;
-        _this.state = {
-            id: _this.generateId()
-        };
+        _this.id = _this.generateId();
+        console.log("ctor");
         return _this;
     }
     TrixEditor.prototype.generateId = function () {
@@ -124,24 +123,24 @@ var TrixEditor = (function (_super) {
         return "T" + timestamp.toString();
     };
     TrixEditor.prototype.componentDidMount = function () {
-        var state = this.state;
         var props = this.props;
-        var elm = document.createElement("trix-editor");
-        elm.id = "editor-" + state.id;
-        elm.setAttribute("input", "input-" + state.id);
-        if (props.autoFocus) {
-            elm.setAttribute("autoFocus", props.autoFocus.toString());
+        console.log("get by id", this.id);
+        console.log(document.body.innerHTML);
+        this.editor = document.getElementById("editor-" + this.id);
+        if (this.editor) {
+            this.editor.addEventListener('trix-initialize', this.handleChange.bind(this));
+            this.editor.addEventListener('trix-change', this.handleChange.bind(this));
+            if (props.uploadURL) {
+                this.editor.addEventListener("trix-attachment-add", this.handleUpload.bind(this));
+            }
+            if (props.onEditorReady && typeof props.onEditorReady == "function") {
+                props.onEditorReady(this.editor);
+            }
         }
-        if (props.placeholder) {
-            elm.setAttribute("placeholder", props.placeholder);
+        else {
+            console.error("editor not found");
         }
-        document.getElementById("te-" + this.state.id).appendChild(elm);
-        this.editor = document.getElementById("editor-" + this.state.id);
-        this.editor.addEventListener('trix-initialize', this.handleChange.bind(this));
-        this.editor.addEventListener('trix-change', this.handleChange.bind(this));
-        if (this.props.uploadURL) {
-            this.editor.addEventListener("trix-attachment-add", this.handleUpload.bind(this));
-        }
+        console.log("did mount");
     };
     TrixEditor.prototype.componentWillUnmount = function () {
         this.editor.removeEventListener("trix-initialize", this.handleChange);
@@ -149,10 +148,12 @@ var TrixEditor = (function (_super) {
         if (this.props.uploadURL) {
             this.editor.removeEventListener("trix-attachment-add", this.handleUpload);
         }
+        console.log("will unmount");
     };
     TrixEditor.prototype.handleChange = function (e) {
         if (this.props.onChange) {
             this.props.onChange(e.target.innerHTML, e.target.innerText);
+            console.log("on change");
         }
     };
     TrixEditor.prototype.handleUpload = function (e) {
@@ -192,12 +193,25 @@ var TrixEditor = (function (_super) {
     };
     TrixEditor.prototype.render = function () {
         var state = this.state;
-        return (React.createElement("div", { id: "te-" + state.id },
-            React.createElement("input", { type: "hidden", id: "input-" + state.id, value: this.props.value })));
+        var props = this.props;
+        var attributes = {
+            "id": "editor-" + this.id,
+            "input": "input-" + this.id
+        };
+        if (props.autoFocus) {
+            attributes["autoFocus"] = props.autoFocus.toString();
+        }
+        if (props.placeholder) {
+            attributes["placeholder"] = props.placeholder;
+        }
+        console.log("id:", this.id);
+        return (React.createElement("div", null,
+            React.createElement("trix-editor", attributes),
+            React.createElement("input", { type: "hidden", id: "input-" + this.id, value: this.props.value })));
     };
     return TrixEditor;
 }(React.Component));
-exports.default = TrixEditor;
+exports.TrixEditor = TrixEditor;
 
 
 /***/ })
