@@ -1,5 +1,13 @@
 /// <reference types="react" />
 import * as React from "react";
+export interface MergeTag {
+    tag: string;
+    name: string;
+}
+export interface MergeTags {
+    trigger: string;
+    tags: Array<MergeTag>;
+}
 export interface TrixEditorProps {
     autoFocus?: boolean;
     placeholder?: string;
@@ -8,12 +16,34 @@ export interface TrixEditorProps {
     uploadData?: {
         [key: string]: string;
     };
+    mergeTags: Array<MergeTags>;
     onEditorReady?: (editor: any) => void;
     onChange: (html: string, text: string) => void;
 }
-export declare class TrixEditor extends React.Component<TrixEditorProps, {}> {
+export interface TrixEditorState {
+    showMergeTags: boolean;
+    tags: Array<MergeTag>;
+}
+export interface Editor {
+    getSelectedRange: () => Array<number>;
+    setSelectedRange: (range: Array<number>) => void;
+    getClientRectAtPosition: (pos: number) => Rect;
+    expandSelectionInDirection: (direction: "forward" | "backward") => void;
+    insertString: (s: string) => void;
+}
+export interface Rect {
+    top: number;
+    left: number;
+    right: number;
+    bottom: number;
+    width: number;
+    height: number;
+}
+export declare class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState> {
     private id;
+    private container;
     private editor;
+    private d;
     constructor(props: TrixEditorProps);
     private generateId();
     componentDidMount(): void;
@@ -21,5 +51,7 @@ export declare class TrixEditor extends React.Component<TrixEditorProps, {}> {
     private handleChange(e);
     private handleUpload(e);
     private uploadAttachment(attachment);
+    private handleTagSelected(t, e);
+    private renderTagSelector(tags);
     render(): JSX.Element;
 }

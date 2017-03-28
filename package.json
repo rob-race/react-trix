@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "build": "npm run build:lib && NODE_ENV=production webpack --config webpack.prod.config.js",
-    "build:lib": "tsc",
+    "build:lib": "rm ./lib/* && tsc",
     "prebuild": "rm -rf dist && mkdir dist",
     "prepublish": "npm run build",
     "postbuild": "NODE_ENV=production TARGET=minify webpack --config webpack.prod.config.js",

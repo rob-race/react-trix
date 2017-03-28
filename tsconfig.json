@@ -3,9 +3,9 @@
 		"outDir": "./lib",
 		"target": "es5",
 		"module": "commonjs",
-		"declaration": true,
 		"noImplicitAny": false,
 		"removeComments": true,
+    "declaration": true,
 		"sourceMap": true,
 		"jsx": "react"
 	},
