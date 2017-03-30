@@ -16,6 +16,18 @@
   ],
   "tasks": [
     {
+      //Buil Task
+      "taskName": "build",
+      // Run on Shift+Ctrl+B
+      "isBuildCommand": true,
+      // Don't run on Shift+Ctrl+T
+      "isTestCommand": false,
+      "showOutput": "silent",
+      "args": [
+        "pack"
+      ]
+    },
+    {
       //Test Task
       "taskName": "mocha",
       // Don't run on Shift+Ctrl+B
