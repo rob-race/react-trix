@@ -214,7 +214,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
       "cursor": "pointer"
     }
     return (
-      <div style={boxStyle}>
+      <div style={boxStyle} className="react-trix-suggestions">
         {tags.map((t) => {
           return <a key={t.name} style={tagStyle} href="#" onClick={this.handleTagSelected.bind(this, t)}>{t.name}</a>
         })}

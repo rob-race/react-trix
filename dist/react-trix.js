@@ -251,7 +251,7 @@ var TrixEditor = (function (_super) {
             "padding": ".2em .5em",
             "cursor": "pointer"
         };
-        return (React.createElement("div", { style: boxStyle }, tags.map(function (t) {
+        return (React.createElement("div", { style: boxStyle, className: "react-trix-suggestions" }, tags.map(function (t) {
             return React.createElement("a", { key: t.name, style: tagStyle, href: "#", onClick: _this.handleTagSelected.bind(_this, t) }, t.name);
         })));
     };

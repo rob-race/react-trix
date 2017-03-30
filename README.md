@@ -1,6 +1,6 @@
 # React Trix 0.2.0
 
-React wrapper around [Trix](https://github.com/basecamp/trix) editor from Basecamp. With additionnal features that wer'e
+React wrapper around [Trix](https://github.com/basecamp/trix) editor from Basecamp. With additionnal features that we're
 needing at [Roadmap](https://roadmap.space).
 
 ## Getting started
@@ -15,18 +15,23 @@ Trix will be included as dependency. You should already have [React](https://fac
 
 ### Usage
 
-```js
+```jsx
 import * as React from "react";
 import { TrixEditor } from "react-trix";
 
 export class Test extends Rect.Component {
+  handleEditorReady(editor) {
+    // this is a reference back to the editor if you want to
+    // do editing programatically
+    editor.insertText("editor is ready");
+  }
   handleChange(html, text) {
     // html is the new html content
     // text is the new text content
   }
   render() {
     return (
-      <TrixEditor onChange={this.handleChange} />
+      <TrixEditor onChange={this.handleChange} onEditorReady={this.handleReady} />
     );
   }
 }
@@ -36,7 +41,7 @@ export class Test extends Rect.Component {
 
 Those are the properties you can use on the `<TrixEditor />`.
 
-```js
+```jsx
 let mergeTags = [{
   trigger: "@",
   tags: [
@@ -57,13 +62,27 @@ let mergeTags = [{
   uploadURL="https://domain.com/imgupload/receiving/post"
   uploadData={{"key1": "value", "key2": "value"}}
   mergeTags={mergeTags}
+  onChange={on_change_handler}
+  onEditorReady={on_editor_ready_handler}
 />
 ```
 
 ### Merge tags
 
-You give a trigger character, for example "@" and when the user typed this character a small popup suggestions
+You give a trigger character, for example "@" and when the user type this character a small popup suggestions
 will be displayed where user can click and the `tag` will be added.
+
+You may customize the suggestion box via the CSS class `react-trix-suggestions` like this:
+
+```css
+.react-trix-suggestions {
+  /* for the container */
+}
+
+.react-trix-suggestions a {
+  /* for each suggestion */
+}
+```
 
 ## Running the tests
 
