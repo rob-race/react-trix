@@ -15,6 +15,12 @@ Trix will be included as dependency. You should already have [React](https://fac
 
 ### Usage
 
+Make sure you have the latest Trix JavaScript and optionally their CSS on pages where you are using react-trix.
+
+```html
+<script src="https://rawgit.com/basecamp/trix/master/dist/trix.js"></script>
+```
+
 ```jsx
 import * as React from "react";
 import { TrixEditor } from "react-trix";
