@@ -1,7 +1,7 @@
 # React Trix 0.2.0
 
-React wrapper around [Trix](https://github.com/basecamp/trix) editor from Basecamp. With additionnal features that we're
-needing at [Roadmap](https://roadmap.space).
+React wrapper around [Trix](https://github.com/basecamp/trix) editor from Basecamp. With additional features that we're
+needing at [Roadmap](https://roadmap.space) when sending emails and collaborating with comments.
 
 ## Getting started
 
