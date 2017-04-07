@@ -78,11 +78,11 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
   componentDidMount() {
     let props = this.props;
 
-    //this.editor = document.getElementById(`editor-${this.id}`);
-    this.container = this.d && this.d.children && this.d.children.length >= 2 ? this.d.children[1] : null;
+    this.container = document.getElementById(`editor-${this.id}`);
+    //this.container = this.d && this.d.children && this.d.children.length >= 2 ? this.d.children[1] : null;
     //this.editor = this.d;
     if (this.container) {
-      this.container.addEventListener('trix-initialize', () => {
+      this.container.addEventListener("trix-initialize", () => {
         this.editor = this.container.editor;
         if (!this.editor) {
           console.error("cannot  find trix editor");
@@ -242,8 +242,6 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     if (state.showMergeTags) {
       mergetags = this.renderTagSelector(state.tags);
     }
-    //<trix-editor ref={(e) => this.editor = e} input={`input-${this.id}`} />
-    //
     return (
       <div ref={(d) => this.d = d}>
         {React.createElement("trix-editor", attributes)}
