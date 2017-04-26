@@ -191,12 +191,14 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
       return null;
     }
 
+    const editorPosition = document.getElementById("trix-editor-top-level").getBoundingClientRect();
+    
     // current cursor position
     const rect = this.editor.getClientRectAtPosition(this.editor.getSelectedRange()[0]);
     const boxStyle = {
       "position": "absolute",
-      "top": rect.top + 25,
-      "left": rect.left + 25,
+      "top": rect.top + 25 - editorPosition.top,
+      "left": rect.left + 25 - editorPosition.left,
       "width": "250px",
       "boxSizing": "border-box",
       "padding": 0,
@@ -243,7 +245,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
       mergetags = this.renderTagSelector(state.tags);
     }
     return (
-      <div ref={(d) => this.d = d}>
+      <div id="trix-editor-top-level" ref={(d) => this.d = d} style={{ "position": "relative" }}>
         {React.createElement("trix-editor", attributes)}
         <input
           type="hidden"
