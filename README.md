@@ -25,7 +25,7 @@ Make sure you have the latest Trix JavaScript and optionally their CSS on pages 
 import * as React from "react";
 import { TrixEditor } from "react-trix";
 
-export class Test extends Rect.Component {
+export class Test extends React.Component {
   handleEditorReady(editor) {
     // this is a reference back to the editor if you want to
     // do editing programatically
