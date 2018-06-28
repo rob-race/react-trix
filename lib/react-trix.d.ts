@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from "react";
 export interface MergeTag {
     tag: string;
@@ -45,13 +44,13 @@ export declare class TrixEditor extends React.Component<TrixEditorProps, TrixEdi
     private editor;
     private d;
     constructor(props: TrixEditorProps);
-    private generateId();
+    private generateId;
     componentDidMount(): void;
     componentWillUnmount(): void;
-    private handleChange(e);
-    private handleUpload(e);
-    private uploadAttachment(attachment);
-    private handleTagSelected(t, e);
-    private renderTagSelector(tags);
+    private handleChange;
+    private handleUpload;
+    private uploadAttachment;
+    private handleTagSelected;
+    private renderTagSelector;
     render(): JSX.Element;
 }

@@ -1,6 +1,6 @@
 {
   "name": "react-trix",
-  "version": "0.2.2",
+  "version": "0.3.1",
   "description": "React wrapper around Basecamp's Trix editor.",
   "main": "main.js",
   "scripts": {
@@ -35,32 +35,32 @@
   },
   "homepage": "https://github.com/dstpierre/react-trix",
   "dependencies": {
-    "trix": "^0.10.1"
+    "trix": "^0.11.1"
   },
   "devDependencies": {
-    "@types/chai": "^3.4.35",
-    "@types/enzyme": "^2.7.6",
-    "@types/mocha": "^2.2.40",
-    "@types/react": "^15.0.18",
+    "@types/chai": "^3.5.2",
+    "@types/enzyme": "^2.8.12",
+    "@types/mocha": "^2.2.48",
+    "@types/react": "^15.6.18",
     "@types/react-dom": "^0.14.23",
     "@types/sinon": "^1.16.36",
     "chai": "^3.5.0",
-    "enzyme": "^2.8.0",
+    "enzyme": "^2.9.1",
     "http-server": "^0.9.0",
     "jsdom": "^9.12.0",
-    "mocha": "^3.2.0",
-    "react": "^15.4.2",
-    "react-addons-test-utils": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "sinon": "^2.1.0",
-    "source-map-loader": "^0.2.0",
-    "ts-loader": "^2.0.2",
-    "typescript": "^2.2.1",
-    "webpack": "^2.3.0"
+    "mocha": "^3.5.3",
+    "react": "^16.4.0",
+    "react-addons-test-utils": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "sinon": "^2.4.1",
+    "source-map-loader": "^0.2.3",
+    "ts-loader": "^2.3.7",
+    "typescript": "^2.9.2",
+    "webpack": "^2.7.0"
   },
   "peerDependencies": {
-    "react": ">=0.14.0 <= 15",
-    "react-dom": ">=0.14.0 <= 15"
+    "react": ">=16.0 < 17",
+    "react-dom": ">=16.0 < 17"
   },
   "files": [
     "dist",

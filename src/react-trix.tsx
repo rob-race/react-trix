@@ -166,7 +166,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     };
     xhr.onload = () => {
       var href, url;
-      if (xhr.status == 204) {
+      if (xhr.status >= 200 && xhr.status < 300) {
         url = href = xhr.responseText;
         return attachment.setAttributes({
           url: url,
@@ -196,7 +196,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     // current cursor position
     const rect = this.editor.getClientRectAtPosition(this.editor.getSelectedRange()[0]);
     const boxStyle = {
-      "position": "absolute",
+      "position": "absolute" as "absolute",
       "top": rect.top + 25 - editorPosition.top,
       "left": rect.left + 25 - editorPosition.left,
       "width": "250px",
