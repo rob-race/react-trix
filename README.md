@@ -37,7 +37,7 @@ export class Test extends React.Component {
   }
   render() {
     return (
-      <TrixEditor onChange={this.handleChange} onEditorReady={this.handleReady} />
+      <TrixEditor onChange={this.handleChange} onEditorReady={this.handleEditorReady} />
     );
   }
 }
