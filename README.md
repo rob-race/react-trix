@@ -43,7 +43,7 @@ export class Test extends React.Component {
   handleEditorReady(editor) {
     // this is a reference back to the editor if you want to
     // do editing programatically
-    editor.insertText("editor is ready");
+    editor.insertString("editor is ready");
   }
   handleChange(html, text) {
     // html is the new html content
@@ -111,4 +111,3 @@ Still having some issues testing Trix with enzyme/jsdom.
 ## Contributions
 
 Contributions are welcome and appreciated.
-
