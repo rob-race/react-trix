@@ -1,4 +1,5 @@
 import * as React from "react";
+import { BoxSizingProperty } from "csstype";
 
 export interface MergeTag {
   tag: string;
@@ -200,7 +201,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
       "top": rect.top + 25 - editorPosition.top,
       "left": rect.left + 25 - editorPosition.left,
       "width": "250px",
-      "boxSizing": "border-box",
+      "boxSizing": "border-box" as BoxSizingProperty,
       "padding": 0,
       "margin": ".2em 0 0",
       "backgroundColor": "hsla(0,0%,100%,.9)",
