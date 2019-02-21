@@ -240,6 +240,10 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     if (props.placeholder) {
       attributes["placeholder"] = props.placeholder;
     }
+		
+		if (props.toolbar) {
+			attributes["toolbar"] = props.toolbar;
+		}
 
     let mergetags: React.ReactNode = null;
     if (state.showMergeTags) {
