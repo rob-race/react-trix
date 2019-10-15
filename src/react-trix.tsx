@@ -154,10 +154,10 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     // add any custom data that were passed
     if (this.props.uploadData) {
       for (var k in this.props.uploadData) {
-        form[k] = this.props.uploadData[k];
+        form.append(k, this.props.uploadData[k]);
       }
     }
-    form.append("Content-Type", file.type);
+    //form.append("Content-Type", "multipart/form-data");
     form.append("file", file);
     xhr = new XMLHttpRequest();
     xhr.open("POST", this.props.uploadURL, true);
