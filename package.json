@@ -1,6 +1,6 @@
 {
   "name": "react-trix",
-  "version": "0.4.1",
+  "version": "0.5.1",
   "description": "React wrapper around Basecamp's Trix editor.",
   "main": "main.js",
   "scripts": {
@@ -35,17 +35,17 @@
   },
   "homepage": "https://github.com/dstpierre/react-trix",
   "dependencies": {
-    "trix": "^1.0.0"
+    "trix": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^16.7.22",
     "@types/react-dom": "^16.0.11",
-    "parcel": "^1.11.0",
+    "parcel": "^1.12.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "source-map-loader": "^0.2.4",
-    "ts-loader": "^5.3.3",
-    "typescript": "^3.3.1"
+    "ts-loader": "^6.2.0",
+    "typescript": "^3.6.4"
   },
   "peerDependencies": {
     "react": ">=16.0 < 17",
