@@ -14,6 +14,7 @@ export interface MergeTags {
 export interface TrixEditorProps {
   autoFocus?: boolean;
   placeholder?: string;
+  toolbar?: string;
   value?: string;
   uploadURL?: string;
   uploadData?: { [key: string]: string };
@@ -241,9 +242,9 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
       attributes["placeholder"] = props.placeholder;
     }
 		
-		if (props.toolbar) {
-			attributes["toolbar"] = props.toolbar;
-		}
+    if (props.toolbar) {
+        attributes["toolbar"] = props.toolbar;
+    }
 
     let mergetags: React.ReactNode = null;
     if (state.showMergeTags) {
