@@ -30,7 +30,7 @@ npm i trix
 ```
 
 ```jsx
-import trix from 'trix'
+import "trix/dist/trix";
 ```
 
 If you're using npm version with SSR make sure to import trix on page level.
