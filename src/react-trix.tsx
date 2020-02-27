@@ -1,5 +1,6 @@
 import * as React from "react";
 import { BoxSizingProperty } from "csstype";
+import { v4 as uuidv4 } from 'uuid';
 
 export interface MergeTag {
   tag: string;
@@ -64,18 +65,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     }
   }
   private generateId(): string {
-    let timestamp = Date.now();
-    let uniqueNumber = 0;
-
-    (() => {
-      // If created at same millisecond as previous
-      if (timestamp <= uniqueNumber) {
-        timestamp = ++uniqueNumber;
-      } else {
-        uniqueNumber = timestamp;
-      }
-    })();
-    return "T" + timestamp.toString();
+    return "T" + uuidv4();
   }
   componentDidMount() {
     let props = this.props;
@@ -194,7 +184,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     }
 
     const editorPosition = document.getElementById("trix-editor-top-level").getBoundingClientRect();
-    
+
     // current cursor position
     const rect = this.editor.getClientRectAtPosition(this.editor.getSelectedRange()[0]);
     const boxStyle = {
@@ -241,7 +231,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     if (props.placeholder) {
       attributes["placeholder"] = props.placeholder;
     }
-		
+
     if (props.toolbar) {
         attributes["toolbar"] = props.toolbar;
     }
