@@ -12,6 +12,7 @@ export interface MergeTags {
 }
 
 export interface TrixEditorProps {
+  className?: string;
   autoFocus?: boolean;
   placeholder?: string;
   toolbar?: string;
@@ -228,6 +229,10 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
       "id": `editor-${this.id}`,
       "input": `input-${this.id}`
     };
+
+    if (props.className) {
+      attributes["class"] = props.className;
+    }
 
     if (props.autoFocus) {
       attributes["autoFocus"] = props.autoFocus.toString();

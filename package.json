@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/dstpierre/react-trix",
   "dependencies": {
-    "trix": "^1.2.0"
+    "trix": "^1.2.2"
   },
   "devDependencies": {
     "@types/react": "^16.7.22",
