@@ -1,7 +1,7 @@
-# React Trix 0.6.0
+# React Trix 0.7.0
 
-React wrapper around [Trix](https://github.com/basecamp/trix) editor from Basecamp. With additional features that we're
-needing at [Roadmap](https://roadmap.space) when sending emails and collaborating with comments.
+React wrapper around [Trix](https://github.com/basecamp/trix) editor from Basecamp. With additional features that I
+needed when I was CTO at Roadmap when sending emails and collaborating with comments.
 
 ## Getting started
 
@@ -59,7 +59,12 @@ export class Test extends React.Component {
 
 ### Properties
 
-Those are the properties you can use on the `<TrixEditor />`.
+Those are the optional properties you can use on the `<TrixEditor />`.
+
+**New in v0.7.0**
+
+The default name for the file upload is `file`. You may use the `fileParamName` 
+to change its name, for instance `blob` to work with Ruby on Rails.
 
 ```jsx
 let mergeTags = [{
@@ -76,11 +81,13 @@ let mergeTags = [{
   ]
 }]
 <TrixEditor
+  className="custom-css-class"
   autoFocus={true}
   placeholder="editor's placeholder"
   value="initial content <strong>for the editor</strong>"
   uploadURL="https://domain.com/imgupload/receiving/post"
   uploadData={{"key1": "value", "key2": "value"}}
+  fileParamName="blob"
   mergeTags={mergeTags}
   onChange={on_change_handler}
   onEditorReady={on_editor_ready_handler}
