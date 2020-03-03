@@ -19,6 +19,7 @@ export interface TrixEditorProps {
   value?: string;
   uploadURL?: string;
   uploadData?: { [key: string]: string };
+  fileParamName?: string;
 
   /* list of available merge tag */
   mergeTags: Array<MergeTags>;
@@ -154,8 +155,9 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
         form.append(k, this.props.uploadData[k]);
       }
     }
+    
     //form.append("Content-Type", "multipart/form-data");
-    form.append("file", file);
+    form.append((this.props.fileParamName || "file"), file);
     xhr = new XMLHttpRequest();
     xhr.open("POST", this.props.uploadURL, true);
     xhr.upload.onprogress = (event) => {
