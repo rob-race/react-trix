@@ -1,6 +1,5 @@
 import * as React from "react";
 import { BoxSizingProperty } from "csstype";
-import { v4 as uuidv4 } from 'uuid';
 
 export interface MergeTag {
   tag: string;
@@ -65,7 +64,13 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     }
   }
   private generateId(): string {
-    return "T" + uuidv4();
+    let dt = new Date().getTime();
+    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        let r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return "T" + uuid;
   }
   componentDidMount() {
     let props = this.props;
