@@ -64,18 +64,13 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     }
   }
   private generateId(): string {
-    let timestamp = Date.now();
-    let uniqueNumber = 0;
-
-    (() => {
-      // If created at same millisecond as previous
-      if (timestamp <= uniqueNumber) {
-        timestamp = ++uniqueNumber;
-      } else {
-        uniqueNumber = timestamp;
-      }
-    })();
-    return "T" + timestamp.toString();
+    let dt = new Date().getTime();
+    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        let r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return "T" + uuid;
   }
   componentDidMount() {
     let props = this.props;
@@ -194,7 +189,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     }
 
     const editorPosition = document.getElementById("trix-editor-top-level").getBoundingClientRect();
-    
+
     // current cursor position
     const rect = this.editor.getClientRectAtPosition(this.editor.getSelectedRange()[0]);
     const boxStyle = {
@@ -241,7 +236,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     if (props.placeholder) {
       attributes["placeholder"] = props.placeholder;
     }
-		
+
     if (props.toolbar) {
         attributes["toolbar"] = props.toolbar;
     }
