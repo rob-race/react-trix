@@ -115,7 +115,7 @@ var TrixEditor = (function (_super) {
             "input": "input-" + this.id
         };
         if (props.autoFocus) {
-            attributes["autoFocus"] = props.autoFocus.toString();
+            attributes["autofocus"] = props.autoFocus.toString();
         }
         if (props.placeholder) {
             attributes["placeholder"] = props.placeholder;
