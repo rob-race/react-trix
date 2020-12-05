@@ -237,7 +237,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     }
 
     if (props.autoFocus) {
-      attributes["autoFocus"] = props.autoFocus.toString();
+      attributes["autofocus"] = props.autoFocus.toString();
     }
 
     if (props.placeholder) {
