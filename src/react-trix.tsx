@@ -187,11 +187,11 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     this.editor.insertString(t.tag);
   }
   private renderTagSelector(tags: Array<MergeTag>): React.ReactNode {
-    if (!tags) {
+    if (!tags || !this.editor) {
       return null;
     }
 
-    const editorPosition = document.getElementById("trix-editor-top-level").getBoundingClientRect();
+    const editorPosition = document.getElementById("trix-editor-top-level-" + this.id).getBoundingClientRect();
 
     // current cursor position
     const rect = this.editor.getClientRectAtPosition(this.editor.getSelectedRange()[0]);
@@ -253,7 +253,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
       mergetags = this.renderTagSelector(state.tags);
     }
     return (
-      <div id="trix-editor-top-level" ref={(d) => this.d = d} style={{ "position": "relative" }}>
+      <div id={"trix-editor-top-level-" + this.id} ref={(d) => this.d = d} style={{ "position": "relative" }}>
         {React.createElement("trix-editor", attributes)}
         <input
           type="hidden"
