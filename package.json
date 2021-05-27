@@ -48,8 +48,8 @@
     "typescript": "^3.6.4"
   },
   "peerDependencies": {
-    "react": ">=16.0 < 17",
-    "react-dom": ">=16.0 < 17"
+    "react": ">=16.0",
+    "react-dom": ">=16.0"
   },
   "files": [
     "dist",
