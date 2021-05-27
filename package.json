@@ -1,11 +1,11 @@
 {
   "name": "react-trix",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "React wrapper around Basecamp's Trix editor.",
   "main": "main.js",
   "scripts": {
     "build": "npm run build:lib && parcel build src/react-trix.tsx",
-    "build:lib": "rm ./lib/* && tsc",
+    "build:lib": "rm -rf ./lib/* && tsc",
     "prebuild": "rm -rf dist && mkdir dist",
     "prepublish": "npm run build",
     "postbuild": "parcel build src/react-trix.tsx",

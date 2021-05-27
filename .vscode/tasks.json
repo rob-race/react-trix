@@ -5,39 +5,32 @@
 }
 */
 {
-  "version": "0.1.0",
+  "version": "2.0.0",
   "name": "npmTask",
-  //...
-  "suppressTaskName": true,
   "command": "npm",
-  "isShellCommand": true,
   "args": [
     "run"
   ],
   "tasks": [
     {
-      //Buil Task
-      "taskName": "build",
-      // Run on Shift+Ctrl+B
-      "isBuildCommand": true,
-      // Don't run on Shift+Ctrl+T
-      "isTestCommand": false,
-      "showOutput": "silent",
+      "label": "build",
+      "type": "shell",
       "args": [
+        "run",
         "pack"
-      ]
+      ],
+      "problemMatcher": [],
+      "group": "build"
     },
     {
-      //Test Task
-      "taskName": "mocha",
-      // Don't run on Shift+Ctrl+B
-      "isBuildCommand": false,
-      // Run on Shift+Ctrl+T
-      "isTestCommand": true,
-      "showOutput": "always",
+      "label": "mocha",
+      "type": "shell",
       "args": [
+        "run",
         "test"
-      ]
+      ],
+      "problemMatcher": [],
+      "group": "test"
     }
   ]
 }
