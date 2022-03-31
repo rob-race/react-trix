@@ -1,4 +1,4 @@
-# React Trix 0.9.0
+# React Trix 0.10.0
 
 React wrapper around [Trix](https://github.com/basecamp/trix) editor from Basecamp. With additional features that I
 needed when I was CTO at Roadmap when sending emails and collaborating with comments.
