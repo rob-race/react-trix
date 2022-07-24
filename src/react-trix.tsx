@@ -22,7 +22,7 @@ export interface TrixEditorProps {
   fileParamName?: string;
 
   /* list of available merge tag */
-  mergeTags: Array<MergeTags>;
+  mergeTags?: Array<MergeTags>;
 
   onEditorReady?: (editor: any) => void;
   onChange: (html: string, text: string) => void;
@@ -50,7 +50,10 @@ export interface Rect {
   height: number;
 }
 
-export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState> {
+export class TrixEditor extends React.Component<
+  TrixEditorProps,
+  TrixEditorState
+> {
   private id: string;
   private container: any = null;
   private editor: Editor = null;
@@ -62,16 +65,19 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
 
     this.state = {
       showMergeTags: false,
-      tags: []
-    }
+      tags: [],
+    };
   }
   private generateId(): string {
     let dt = new Date().getTime();
-    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        let r = (dt + Math.random()*16)%16 | 0;
-        dt = Math.floor(dt/16);
-        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
-    });
+    let uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function (c) {
+        let r = (dt + Math.random() * 16) % 16 | 0;
+        dt = Math.floor(dt / 16);
+        return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+      }
+    );
     return "T" + uuid;
   }
   componentDidMount() {
@@ -81,20 +87,31 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     //this.container = this.d && this.d.children && this.d.children.length >= 2 ? this.d.children[1] : null;
     //this.editor = this.d;
     if (this.container) {
-      this.container.addEventListener("trix-initialize", () => {
-        this.editor = this.container.editor;
-        if (!this.editor) {
-          console.error("cannot  find trix editor");
-        }
+      this.container.addEventListener(
+        "trix-initialize",
+        () => {
+          this.editor = this.container.editor;
+          if (!this.editor) {
+            console.error("cannot  find trix editor");
+          }
 
-        if (props.onEditorReady && typeof props.onEditorReady == "function") {
-          props.onEditorReady(this.editor);
-        }
-      }, false);
-      this.container.addEventListener('trix-change', this.handleChange.bind(this), false);
+          if (props.onEditorReady && typeof props.onEditorReady == "function") {
+            props.onEditorReady(this.editor);
+          }
+        },
+        false
+      );
+      this.container.addEventListener(
+        "trix-change",
+        this.handleChange.bind(this),
+        false
+      );
 
       if (props.uploadURL) {
-        this.container.addEventListener("trix-attachment-add", this.handleUpload.bind(this));
+        this.container.addEventListener(
+          "trix-attachment-add",
+          this.handleUpload.bind(this)
+        );
       }
     } else {
       console.error("editor not found");
@@ -105,7 +122,10 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     this.container.removeEventListener("trix-change", this.handleChange);
 
     if (this.props.uploadURL) {
-      this.container.removeEventListener("trix-attachment-add", this.handleUpload);
+      this.container.removeEventListener(
+        "trix-attachment-add",
+        this.handleUpload
+      );
     }
   }
   private handleChange(e) {
@@ -155,13 +175,13 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
         form.append(k, this.props.uploadData[k]);
       }
     }
-    
+
     //form.append("Content-Type", "multipart/form-data");
-    form.append((this.props.fileParamName || "file"), file);
+    form.append(this.props.fileParamName || "file", file);
     xhr = new XMLHttpRequest();
     xhr.open("POST", this.props.uploadURL, true);
     xhr.upload.onprogress = (event) => {
-      var progress = event.loaded / event.total * 100;
+      var progress = (event.loaded / event.total) * 100;
       return attachment.setUploadProgress(progress);
     };
     xhr.onload = () => {
@@ -170,13 +190,16 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
         url = href = xhr.responseText;
         return attachment.setAttributes({
           url: url,
-          href: href
+          href: href,
         });
       }
     };
     return xhr.send(form);
   }
-  private handleTagSelected(t: MergeTag, e: React.MouseEvent<HTMLAnchorElement>): void {
+  private handleTagSelected(
+    t: MergeTag,
+    e: React.MouseEvent<HTMLAnchorElement>
+  ): void {
     e.preventDefault();
 
     let state: TrixEditorState = this.state;
@@ -191,34 +214,47 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
       return null;
     }
 
-    const editorPosition = document.getElementById("trix-editor-top-level-" + this.id).getBoundingClientRect();
+    const editorPosition = document
+      .getElementById("trix-editor-top-level-" + this.id)
+      .getBoundingClientRect();
 
     // current cursor position
-    const rect = this.editor.getClientRectAtPosition(this.editor.getSelectedRange()[0]);
+    const rect = this.editor.getClientRectAtPosition(
+      this.editor.getSelectedRange()[0]
+    );
     const boxStyle = {
-      "position": "absolute" as "absolute",
-      "top": rect.top + 25 - editorPosition.top,
-      "left": rect.left + 25 - editorPosition.left,
-      "width": "250px",
-      "boxSizing": "border-box" as BoxSizingProperty,
-      "padding": 0,
-      "margin": ".2em 0 0",
-      "backgroundColor": "hsla(0,0%,100%,.9)",
-      "borderRadius": ".3em",
-      "background": "linear-gradient(to bottom right, white, hsla(0,0%,100%,.8))",
-      "border": "1px solid rgba(0,0,0,.3)",
-      "boxShadow": ".05em .2em .6em rgba(0,0,0,.2)",
-	    "textShadow": "none"
+      position: "absolute" as "absolute",
+      top: rect.top + 25 - editorPosition.top,
+      left: rect.left + 25 - editorPosition.left,
+      width: "250px",
+      boxSizing: "border-box" as BoxSizingProperty,
+      padding: 0,
+      margin: ".2em 0 0",
+      backgroundColor: "hsla(0,0%,100%,.9)",
+      borderRadius: ".3em",
+      background: "linear-gradient(to bottom right, white, hsla(0,0%,100%,.8))",
+      border: "1px solid rgba(0,0,0,.3)",
+      boxShadow: ".05em .2em .6em rgba(0,0,0,.2)",
+      textShadow: "none",
     };
     const tagStyle = {
-      "display": "block",
-      "padding": ".2em .5em",
-      "cursor": "pointer"
-    }
+      display: "block",
+      padding: ".2em .5em",
+      cursor: "pointer",
+    };
     return (
       <div style={boxStyle} className="react-trix-suggestions">
         {tags.map((t) => {
-          return <a key={t.name} style={tagStyle} href="#" onClick={this.handleTagSelected.bind(this, t)}>{t.name}</a>
+          return (
+            <a
+              key={t.name}
+              style={tagStyle}
+              href="#"
+              onClick={this.handleTagSelected.bind(this, t)}
+            >
+              {t.name}
+            </a>
+          );
         })}
       </div>
     );
@@ -228,8 +264,8 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     let props = this.props;
 
     var attributes: { [key: string]: string } = {
-      "id": `editor-${this.id}`,
-      "input": `input-${this.id}`
+      id: `editor-${this.id}`,
+      input: `input-${this.id}`,
     };
 
     if (props.className) {
@@ -245,7 +281,7 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
     }
 
     if (props.toolbar) {
-        attributes["toolbar"] = props.toolbar;
+      attributes["toolbar"] = props.toolbar;
     }
 
     let mergetags: React.ReactNode = null;
@@ -253,13 +289,13 @@ export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState
       mergetags = this.renderTagSelector(state.tags);
     }
     return (
-      <div id={"trix-editor-top-level-" + this.id} ref={(d) => this.d = d} style={{ "position": "relative" }}>
+      <div
+        id={"trix-editor-top-level-" + this.id}
+        ref={(d) => (this.d = d)}
+        style={{ position: "relative" }}
+      >
         {React.createElement("trix-editor", attributes)}
-        <input
-          type="hidden"
-          id={`input-${this.id}`}
-          value={this.props.value}
-        />
+        <input type="hidden" id={`input-${this.id}`} value={this.props.value} />
         {mergetags}
       </div>
     );
