@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BoxSizingProperty } from "csstype";
+import {BoxSizingProperty} from "csstype";
 
 export interface MergeTag {
   tag: string;
@@ -18,7 +18,7 @@ export interface TrixEditorProps {
   toolbar?: string;
   value?: string;
   uploadURL?: string;
-  uploadData?: { [key: string]: string };
+  uploadData?: {[key: string]: string};
   fileParamName?: string;
 
   /* list of available merge tag */
@@ -53,7 +53,7 @@ export interface Rect {
 export class TrixEditor extends React.Component<
   TrixEditorProps,
   TrixEditorState
-> {
+  > {
   private id: string;
   private container: any = null;
   private editor: Editor = null;
@@ -263,7 +263,7 @@ export class TrixEditor extends React.Component<
     let state: TrixEditorState = this.state;
     let props = this.props;
 
-    var attributes: { [key: string]: string } = {
+    var attributes: {[key: string]: string} = {
       id: `editor-${this.id}`,
       input: `input-${this.id}`,
     };
@@ -292,7 +292,7 @@ export class TrixEditor extends React.Component<
       <div
         id={"trix-editor-top-level-" + this.id}
         ref={(d) => (this.d = d)}
-        style={{ position: "relative" }}
+        style={{position: "relative"}}
       >
         {React.createElement("trix-editor", attributes)}
         <input type="hidden" id={`input-${this.id}`} value={this.props.value} />
