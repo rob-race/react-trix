@@ -1,5 +1,5 @@
 import * as React from "react";
-import {BoxSizingProperty} from "csstype";
+import { BoxSizingProperty } from "csstype";
 
 export interface MergeTag {
   tag: string;
@@ -18,7 +18,7 @@ export interface TrixEditorProps {
   toolbar?: string;
   value?: string;
   uploadURL?: string;
-  uploadData?: {[key: string]: string};
+  uploadData?: { [key: string]: string };
   fileParamName?: string;
 
   /* list of available merge tag */
@@ -50,10 +50,7 @@ export interface Rect {
   height: number;
 }
 
-export class TrixEditor extends React.Component<
-  TrixEditorProps,
-  TrixEditorState
-  > {
+export class TrixEditor extends React.Component<TrixEditorProps, TrixEditorState> {
   private id: string;
   private container: any = null;
   private editor: Editor = null;
@@ -70,14 +67,11 @@ export class TrixEditor extends React.Component<
   }
   private generateId(): string {
     let dt = new Date().getTime();
-    let uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-      /[xy]/g,
-      function (c) {
-        let r = (dt + Math.random() * 16) % 16 | 0;
-        dt = Math.floor(dt / 16);
-        return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
-      }
-    );
+    let uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+      let r = (dt + Math.random() * 16) % 16 | 0;
+      dt = Math.floor(dt / 16);
+      return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+    });
     return "T" + uuid;
   }
   componentDidMount() {
@@ -101,17 +95,10 @@ export class TrixEditor extends React.Component<
         },
         false
       );
-      this.container.addEventListener(
-        "trix-change",
-        this.handleChange.bind(this),
-        false
-      );
+      this.container.addEventListener("trix-change", this.handleChange.bind(this), false);
 
       if (props.uploadURL) {
-        this.container.addEventListener(
-          "trix-attachment-add",
-          this.handleUpload.bind(this)
-        );
+        this.container.addEventListener("trix-attachment-add", this.handleUpload.bind(this));
       }
     } else {
       console.error("editor not found");
@@ -122,10 +109,7 @@ export class TrixEditor extends React.Component<
     this.container.removeEventListener("trix-change", this.handleChange);
 
     if (this.props.uploadURL) {
-      this.container.removeEventListener(
-        "trix-attachment-add",
-        this.handleUpload
-      );
+      this.container.removeEventListener("trix-attachment-add", this.handleUpload);
     }
   }
   private handleChange(e) {
@@ -196,10 +180,7 @@ export class TrixEditor extends React.Component<
     };
     return xhr.send(form);
   }
-  private handleTagSelected(
-    t: MergeTag,
-    e: React.MouseEvent<HTMLAnchorElement>
-  ): void {
+  private handleTagSelected(t: MergeTag, e: React.MouseEvent<HTMLAnchorElement>): void {
     e.preventDefault();
 
     let state: TrixEditorState = this.state;
@@ -214,14 +195,10 @@ export class TrixEditor extends React.Component<
       return null;
     }
 
-    const editorPosition = document
-      .getElementById("trix-editor-top-level-" + this.id)
-      .getBoundingClientRect();
+    const editorPosition = document.getElementById("trix-editor-top-level-" + this.id).getBoundingClientRect();
 
     // current cursor position
-    const rect = this.editor.getClientRectAtPosition(
-      this.editor.getSelectedRange()[0]
-    );
+    const rect = this.editor.getClientRectAtPosition(this.editor.getSelectedRange()[0]);
     const boxStyle = {
       position: "absolute" as "absolute",
       top: rect.top + 25 - editorPosition.top,
@@ -246,12 +223,7 @@ export class TrixEditor extends React.Component<
       <div style={boxStyle} className="react-trix-suggestions">
         {tags.map((t) => {
           return (
-            <a
-              key={t.name}
-              style={tagStyle}
-              href="#"
-              onClick={this.handleTagSelected.bind(this, t)}
-            >
+            <a key={t.name} style={tagStyle} href="#" onClick={this.handleTagSelected.bind(this, t)}>
               {t.name}
             </a>
           );
@@ -263,7 +235,7 @@ export class TrixEditor extends React.Component<
     let state: TrixEditorState = this.state;
     let props = this.props;
 
-    var attributes: {[key: string]: string} = {
+    var attributes: { [key: string]: string } = {
       id: `editor-${this.id}`,
       input: `input-${this.id}`,
     };
@@ -289,11 +261,7 @@ export class TrixEditor extends React.Component<
       mergetags = this.renderTagSelector(state.tags);
     }
     return (
-      <div
-        id={"trix-editor-top-level-" + this.id}
-        ref={(d) => (this.d = d)}
-        style={{position: "relative"}}
-      >
+      <div id={"trix-editor-top-level-" + this.id} ref={(d) => (this.d = d)} style={{ position: "relative" }}>
         {React.createElement("trix-editor", attributes)}
         <input type="hidden" id={`input-${this.id}`} value={this.props.value} />
         {mergetags}
