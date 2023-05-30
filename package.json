@@ -40,7 +40,7 @@
   "devDependencies": {
     "@types/react": "^16.7.22",
     "@types/react-dom": "^16.0.11",
-    "parcel": "^1.12.4",
+    "parcel": "^2.9.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "source-map-loader": "^0.2.4",
