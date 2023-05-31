@@ -54,6 +54,7 @@
   "files": [
     "dist",
     "lib",
+    "src/react-trix.tsx",
     "README.md",
     "LICENSE",
     "main.js"
