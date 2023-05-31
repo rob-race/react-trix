@@ -26,8 +26,8 @@
     "trix-editor"
   ],
   "author": {
-    "name": "Dominic St-Pierre",
-    "email": "dominicstpierre@gmail.com"
+    "name": "Rob Race",
+    "email": "rob@succinctsoftwarellc.com"
   },
   "license": "MIT",
   "bugs": {
@@ -55,6 +55,7 @@
     "dist",
     "lib",
     "src/react-trix.tsx",
+    "src/main.js.map",
     "README.md",
     "LICENSE",
     "main.js"
