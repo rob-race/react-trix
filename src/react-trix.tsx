@@ -22,7 +22,7 @@ export interface TrixEditorProps {
   fileParamName?: string;
 
   /* list of available merge tag */
-  mergeTags: Array<MergeTags>;
+  mergeTags?: Array<MergeTags>;
 
   onEditorReady?: (editor: any) => void;
   onChange: (html: string, text: string) => void;
